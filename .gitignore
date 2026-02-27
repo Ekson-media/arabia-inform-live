@@ -4,6 +4,7 @@
 # Build and Packaging folders
 website_build/
 ARABIA INFORM website/
+old virsion/
 
 # Archives
 *.zip
