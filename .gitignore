@@ -1,0 +1,19 @@
+# Visual Studio Code
+.vscode/
+
+# Build and Packaging folders
+website_build/
+ARABIA INFORM website/
+
+# Archives
+*.zip
+*.rar
+*.7z
+
+# OS generated files
+.DS_Store
+Thumbs.db
+
+# Developer Scripts
+update_nav.py
+*.py

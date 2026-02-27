@@ -1,0 +1,301 @@
+/* ============================================================
+   ARABIA INFORM — Additional Brand Overrides
+   Real logo colors: Teal (#009EA0) + Red (#CC2226)
+   ============================================================ */
+
+/* Logo nav component using actual logo proportions */
+.nav-logo .logo-badge {
+    background: transparent;
+    padding: 0;
+    width: auto;
+    height: 40px;
+    border-radius: 0;
+}
+
+.nav-logo .logo-badge img {
+    height: 40px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    /* white version on dark nav */
+    transition: filter 0.3s;
+}
+
+.nav-logo-svg {
+    height: 42px;
+    width: auto;
+}
+
+/* Use SVG inline logo in nav */
+.nav-logo-inline {
+    display: flex;
+    align-items: center;
+    gap: 0;
+}
+
+.nav-logo-inline .logo-text-main {
+    font-size: 20px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.15em;
+    font-family: 'Palatino Linotype', Palatino, serif;
+}
+
+.nav-logo-inline .logo-ain {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1.5px solid rgba(0, 158, 160, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    color: var(--teal);
+    font-family: 'Noto Naskh Arabic', serif;
+    margin: 0 8px;
+    flex-shrink: 0;
+}
+
+.nav-logo-inline .logo-divider {
+    width: 24px;
+    height: 1.5px;
+    background: var(--red);
+    display: block;
+}
+
+.nav-logo-inline .logo-sub-tag {
+    font-size: 7.5px;
+    color: rgba(255, 255, 255, 0.45);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* CTA buttons using teal + red */
+.btn-primary {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+    color: var(--white);
+    box-shadow: 0 4px 20px rgba(0, 158, 160, 0.35);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, var(--teal-light), var(--teal));
+    box-shadow: 0 8px 32px rgba(0, 158, 160, 0.45);
+}
+
+.btn-red {
+    background: linear-gradient(135deg, var(--red), var(--red-dark));
+    color: var(--white);
+    border-color: transparent;
+    box-shadow: 0 4px 16px rgba(204, 34, 38, 0.3);
+}
+
+.btn-red:hover {
+    background: linear-gradient(135deg, var(--red-light), var(--red));
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(204, 34, 38, 0.4);
+}
+
+/* Teal accent divider */
+.teal-divider {
+    width: 48px;
+    height: 3px;
+    background: var(--teal);
+    border-radius: 2px;
+    margin: 16px 0;
+}
+
+.teal-divider.center {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Red rule (matching logo's red line) */
+.red-rule {
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--red), transparent);
+    margin: 0;
+}
+
+/* Section label uses teal */
+.section-header .section-label {
+    color: var(--teal);
+}
+
+.section-header .section-label::before {
+    background: var(--teal);
+}
+
+/* Gold (teal alias) stat numbers */
+.stat-number,
+.impact-num,
+.stat-val,
+.archive-stat {
+    color: var(--teal);
+}
+
+/* Card icon backgrounds */
+.card-icon {
+    background: linear-gradient(135deg, var(--teal), var(--teal-dark));
+}
+
+.card-icon svg {
+    color: var(--white);
+}
+
+/* Archive card icon */
+.archive-card .archive-icon {
+    background: rgba(0, 158, 160, 0.15);
+    border-color: rgba(0, 158, 160, 0.3);
+}
+
+.archive-card .archive-icon svg {
+    color: var(--teal);
+}
+
+.archive-card .archive-stat {
+    color: var(--teal);
+}
+
+.archive-card .archive-num {
+    color: rgba(0, 158, 160, 0.1);
+}
+
+/* Tab active state */
+.tab-btn.active {
+    background: var(--teal);
+    color: var(--white);
+}
+
+/* Timeline dots */
+.timeline-dot .dot {
+    background: var(--teal);
+    box-shadow: 0 0 0 3px var(--teal);
+    border-color: var(--navy-dark);
+}
+
+.timeline-year {
+    color: var(--teal);
+}
+
+/* Progress bars */
+.prog-bar-fill {
+    background: linear-gradient(90deg, var(--teal), var(--teal-light));
+}
+
+/* Learn more links */
+.service-card .learn-more {
+    color: var(--teal-dark);
+}
+
+.service-card::before {
+    background: linear-gradient(90deg, var(--teal), var(--blue-mid));
+}
+
+/* Read more links */
+.read-more {
+    color: var(--teal-dark);
+}
+
+/* Section label gold override */
+.text-gold {
+    color: var(--teal);
+}
+
+/* Impact icon */
+.impact-cell .impact-icon {
+    background: rgba(0, 158, 160, 0.1);
+    border-color: rgba(0, 158, 160, 0.2);
+}
+
+.impact-cell .impact-icon svg {
+    color: var(--teal);
+}
+
+/* contact form */
+.form-input:focus,
+.form-select:focus,
+.form-textarea:focus {
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0, 158, 160, 0.12);
+}
+
+/* Quote block */
+.quote-block {
+    border-left-color: var(--teal);
+    background: rgba(0, 158, 160, 0.05);
+}
+
+/* Footer social */
+.social-link:hover {
+    background: rgba(0, 158, 160, 0.15);
+    border-color: rgba(0, 158, 160, 0.3);
+    color: var(--teal);
+}
+
+.footer-links a:hover {
+    color: var(--teal);
+}
+
+.footer-tagline {
+    color: var(--teal);
+}
+
+/* Animated counter highlight */
+.counter-num {
+    color: var(--teal);
+}
+
+/* Partner logo hover */
+.partner-logo:hover {
+    background: rgba(0, 158, 160, 0.08);
+    border-color: rgba(0, 158, 160, 0.3);
+    color: var(--teal);
+}
+
+/* Hero badge color */
+.hero-badge {
+    background: rgba(0, 158, 160, 0.12);
+    border-color: rgba(0, 158, 160, 0.35);
+    color: var(--teal);
+}
+
+.hero-badge .dot {
+    background: var(--teal);
+}
+
+/* Hero radial accents */
+.hero-bg {
+    background:
+        radial-gradient(ellipse at 20% 50%, rgba(0, 95, 122, 0.35) 0%, transparent 50%),
+        radial-gradient(ellipse at 80% 20%, rgba(0, 158, 160, 0.10) 0%, transparent 40%),
+        radial-gradient(ellipse at 60% 80%, rgba(13, 34, 51, 0.8) 0%, transparent 50%),
+        linear-gradient(135deg, #050e17 0%, #0d2233 40%, #081520 100%);
+}
+
+/* Insight card thumb gradient */
+.insight-thumb {
+    background: linear-gradient(135deg, var(--navy), var(--blue-mid));
+}
+
+.insight-thumb .thumb-label {
+    background: rgba(0, 158, 160, 0.9);
+    color: var(--white);
+}
+
+/* CTA band radial */
+.cta-band::before {
+    background:
+        radial-gradient(circle at 20% 50%, rgba(0, 158, 160, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 80% 50%, rgba(0, 95, 122, 0.12) 0%, transparent 50%);
+}
+
+/* Impact band radial */
+.impact-band::before {
+    background: radial-gradient(circle, rgba(0, 158, 160, 0.06) 0%, transparent 70%);
+}
+
+/* Stat strip gold color */
+.stats-strip::before {
+    background: linear-gradient(90deg, transparent, var(--teal), transparent);
+}

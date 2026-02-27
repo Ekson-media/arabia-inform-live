@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arabia Inform - Design System Styleguide</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        .sg-section {
+            margin-bottom: 80px;
+            padding: 40px;
+            border: 1px dashed #ccc;
+        }
+
+        .sg-title {
+            color: var(--navy);
+            border-bottom: 2px solid var(--gold);
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+
+        .color-box {
+            width: 100px;
+            height: 100px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+        }
+
+        .spacing-box {
+            background: var(--blue-light);
+            border: 1px solid var(--navy);
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body class="bg-gray-50">
+    <div class="container pt-12 pb-12">
+        <h1 class="mb-8">Design System Styleguide</h1>
+
+        <div class="sg-section">
+            <h2 class="sg-title">1. Colors</h2>
+            <div class="grid-12 gap-4">
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--navy)"></div>
+                    <strong>--navy</strong><br>#1B2A4A
+                </div>
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--navy-dark)"></div>
+                    <strong>--navy-dark</strong><br>#0F1A2E
+                </div>
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--gold)"></div>
+                    <strong>--gold</strong><br>#C8A84B
+                </div>
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--blue)"></div>
+                    <strong>--blue</strong><br>#2E5F8A
+                </div>
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--blue-light)"></div>
+                    <strong>--blue-light</strong><br>#E8F0F7
+                </div>
+                <div style="grid-column: span 2">
+                    <div class="color-box" style="background: var(--light-gray)"></div>
+                    <strong>--light-gray</strong><br>#F5F7FA
+                </div>
+            </div>
+        </div>
+
+        <div class="sg-section">
+            <h2 class="sg-title">2. Typography (Inter EN)</h2>
+            <h1>H1 Headline - The Arabic Memory</h1>
+            <h2>H2 Headline - 3 Billion Articles</h2>
+            <h3>H3 Headline - Products & Services</h3>
+            <h4>H4 Headline - Features</h4>
+            <p class="lead">Lead Paragraph - For over 27 years, Arabia Inform has captured, preserved, and indexed every
+                meaningful Arabic word.</p>
+            <p>Body Paragraph - Since the first day of operations in 1998, Arabia Inform has captured, digitized, and
+                indexed every article from every major Arabic newspaper.</p>
+        </div>
+
+        <div class="sg-section" dir="rtl" style="font-family: var(--font-ar)">
+            <h2 class="sg-title" style="direction: ltr; text-align: left">2. Typography (Cairo AR - RTL Test)</h2>
+            <h1>العنوان الرئيسي - الذاكرة العربية</h1>
+            <h2>عنوان فرعي - ٣ مليارات مقال</h2>
+            <h3>أنواع المنتجات والخدمات</h3>
+            <p class="lead">الفقرة التمهيدية - لأكثر من ٢٧ عاماً، قامت أرابيا إنفورم بجمع وحفظ وفهرسة كل كلمة عربية.</p>
+            <p>النص العادي - منذ اليوم الأول للعمليات في عام ١٩٩٨، تم ترقيم وأرشفة كل الأخبار.</p>
+        </div>
+
+        <div class="sg-section">
+            <h2 class="sg-title">3. Buttons & UI Components</h2>
+            <div class="mb-4">
+                <button class="btn btn-gold">Primary Gold Button</button>
+                <button class="btn btn-navy">Secondary Navy Button</button>
+                <div style="background: var(--navy); padding: 20px; display: inline-block; border-radius: 8px;">
+                    <button class="btn btn-outline">Outline Button</button>
+                </div>
+            </div>
+
+            <div class="grid-12 gap-4 mt-8">
+                <div class="value-card" style="grid-column: span 4">
+                    <div class="value-icon">🏛️</div>
+                    <h4>Authority Card</h4>
+                    <p>27+ years of unbroken daily operation.</p>
+                </div>
+                <div class="value-card" style="grid-column: span 4">
+                    <div class="value-icon">🎯</div>
+                    <h4>Precision Card</h4>
+                    <p>Bibliographic indexing to global standards.</p>
+                </div>
+                <div class="value-card" style="grid-column: span 4">
+                    <div class="value-icon">⏱️</div>
+                    <h4>Continuity Card</h4>
+                    <p>Operating 24/7, 365 days per year.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="sg-section">
+            <h2 class="sg-title">4. Grid & 8pt Spacing System</h2>
+            <p class="mb-4">Testing .grid-12 and .gap-3 (24px)</p>
+            <div class="grid-12 gap-3 mb-6">
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+                <div style="grid-column: span 1; background: var(--gold-light); height: 50px;"></div>
+            </div>
+
+            <p class="mb-4">Spacing Variables Test</p>
+            <div>
+                <div class="spacing-box" style="width: var(--space-1); height: var(--space-1)"></div> 8px
+                (--space-1)<br>
+                <div class="spacing-box" style="width: var(--space-2); height: var(--space-2)"></div> 16px
+                (--space-2)<br>
+                <div class="spacing-box" style="width: var(--space-3); height: var(--space-3)"></div> 24px
+                (--space-3)<br>
+                <div class="spacing-box" style="width: var(--space-4); height: var(--space-4)"></div> 32px
+                (--space-4)<br>
+                <div class="spacing-box" style="width: var(--space-6); height: var(--space-6)"></div> 48px
+                (--space-6)<br>
+                <div class="spacing-box" style="width: var(--space-8); height: var(--space-8)"></div> 64px
+                (--space-8)<br>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

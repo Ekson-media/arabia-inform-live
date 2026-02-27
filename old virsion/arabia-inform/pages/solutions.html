@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description"
+        content="Arabia Inform Solutions — Tailored Arabic media intelligence for Government, Academic, Corporate, Media, and AI/Technology audiences." />
+    <title>Solutions — Arabia Inform</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Cairo:wght@400;600;700;900&family=Noto+Naskh+Arabic:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <link rel="stylesheet" href="../css/brand.css" />
+    <style>
+        .solution-hero {
+            background: var(--navy-dark);
+            border-radius: var(--r-xl);
+            padding: 52px;
+            border: 1px solid rgba(0, 158, 160, 0.15);
+            margin-bottom: 32px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .solution-hero h2 {
+            color: white;
+            font-size: clamp(20px, 2.5vw, 28px);
+            font-weight: 700;
+            line-height: 1.35;
+            margin-bottom: 12px;
+        }
+
+        .solution-hero p {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 15px;
+            line-height: 1.75;
+            margin-bottom: 20px;
+        }
+
+        .solution-metrics {
+            background: rgba(0, 158, 160, 0.06);
+            border: 1px solid rgba(0, 158, 160, 0.12);
+            border-radius: var(--r-lg);
+            padding: 24px;
+        }
+
+        .sol-metric {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 11px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .sol-metric:last-child {
+            border-bottom: none;
+        }
+
+        .sol-metric-label {
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 13px;
+        }
+
+        .sol-metric-value {
+            color: var(--teal);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .solution-benefit {
+            display: flex;
+            gap: 10px;
+            align-items: flex-start;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .solution-benefit::before {
+            content: '';
+            width: 16px;
+            height: 16px;
+            min-width: 16px;
+            border-radius: 50%;
+            background: rgba(0, 158, 160, 0.2);
+            border: 1.5px solid var(--teal);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M3 8l3.5 3.5L13 4.5' stroke='%23009EA0' stroke-width='2' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+            background-size: 10px;
+            background-repeat: no-repeat;
+            background-position: center;
+            margin-top: 2px;
+        }
+
+        @media(max-width:768px) {
+            .solution-hero {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="../index.html" class="nav-logo">
+                <div class="nav-logo-inline"><span class="logo-text-main">ARABIA</span><span
+                        class="logo-ain">ع</span><span class="logo-text-main">INFORM</span></div>
+            </a>
+            <ul class="nav-menu" id="nav-menu">
+                <li><a href="../index.html" class="nav-link">Home</a></li>
+                <li><a href="about.html" class="nav-link">About Us</a></li>
+                <li><a href="archive.html" class="nav-link">The Archive</a></li>
+                <li><a href="products.html" class="nav-link">Products</a></li>
+                <li><a href="solutions.html" class="nav-link" style="color:var(--teal);">Solutions</a></li>
+                <li><a href="impact.html" class="nav-link">Impact</a></li>
+                <li><a href="insights.html" class="nav-link">Insights</a></li>
+                <li><a href="contact.html" class="nav-link">Contact</a></li>
+            </ul>
+            <div class="nav-actions"><button class="lang-toggle">عربي</button><a href="contact.html"
+                    class="btn btn-primary btn-sm">Request Demo</a><button class="nav-hamburger" id="hamburger"
+                    aria-label="Open menu" aria-expanded="false"
+                    aria-controls="nav-menu"><span></span><span></span><span></span></button></div>
+        </div>
+    </nav>
+
+    <section class="page-hero">
+        <div class="container">
+            <div class="breadcrumb"><a href="../index.html">Home</a><span class="sep">›</span><span
+                    class="current">Solutions</span></div>
+            <div class="page-hero-label">Who Are You?</div>
+            <h1 class="display-lg">Solutions for Every Audience</h1>
+            <p class="hero-sub">Arabia Inform serves governments, researchers, media organizations, corporations, and AI
+                developers. Find the solutions tailored precisely to your needs.</p>
+        </div>
+    </section>
+
+    <!-- Audience quick-jump -->
+    <div
+        style="background:var(--navy);padding:20px 0;position:sticky;top:72px;z-index:100;border-bottom:1px solid rgba(255,255,255,0.06);">
+        <div class="container">
+            <div style="display:flex;gap:8px;overflow-x:auto;">
+                <a href="#government"
+                    style="padding:8px 20px;border-radius:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all 0.2s;"
+                    onmouseover="this.style.background='rgba(0,158,160,0.2)';this.style.color='var(--teal)'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.75)'">🏛️
+                    Government</a>
+                <a href="#academic"
+                    style="padding:8px 20px;border-radius:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all 0.2s;"
+                    onmouseover="this.style.background='rgba(0,158,160,0.2)';this.style.color='var(--teal)'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.75)'">🎓
+                    Academic</a>
+                <a href="#corporate"
+                    style="padding:8px 20px;border-radius:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all 0.2s;"
+                    onmouseover="this.style.background='rgba(0,158,160,0.2)';this.style.color='var(--teal)'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.75)'">🏢
+                    Corporate</a>
+                <a href="#media"
+                    style="padding:8px 20px;border-radius:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all 0.2s;"
+                    onmouseover="this.style.background='rgba(0,158,160,0.2)';this.style.color='var(--teal)'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.75)'">📺
+                    Media</a>
+                <a href="#ai"
+                    style="padding:8px 20px;border-radius:20px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.1);color:rgba(255,255,255,0.75);font-size:13px;font-weight:600;text-decoration:none;white-space:nowrap;transition:all 0.2s;"
+                    onmouseover="this.style.background='rgba(0,158,160,0.2)';this.style.color='var(--teal)'"
+                    onmouseout="this.style.background='rgba(255,255,255,0.08)';this.style.color='rgba(255,255,255,0.75)'">🤖
+                    AI &amp; Tech</a>
+            </div>
+        </div>
+    </div>
+
+    <section class="section" id="government">
+        <div class="container">
+            <div class="solution-hero fade-up">
+                <div>
+                    <span
+                        style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,158,160,0.12);border:1px solid rgba(0,158,160,0.25);border-radius:16px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;">🏛️
+                        Government &amp; Public Sector</span>
+                    <h2>"Make Decisions Grounded in 27 Years of Arabic Intelligence."</h2>
+                    <p>Governments across the Arab world and globally need reliable, comprehensive, and historically
+                        deep Arabic media intelligence. Arabia Inform provides the only archive with complete, unbroken
+                        coverage since 1998.</p>
+                    <div class="solution-benefit">Real-time national and regional narrative monitoring across all Arabic
+                        media</div>
+                    <div class="solution-benefit">Early warning systems for reputational, political, or security-related
+                        media trends</div>
+                    <div class="solution-benefit">Cross-country comparative media analysis for diplomatic and policy
+                        contexts</div>
+                    <div class="solution-benefit">Historical archive for legal, investigative, and policy research</div>
+                    <div class="solution-benefit">Confidential, secure delivery channels and institutional licensing
+                    </div>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Request a Government
+                        Briefing →</a>
+                </div>
+                <div class="solution-metrics">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">
+                        Key Metrics</div>
+                    <div class="sol-metric"><span class="sol-metric-label">Countries monitored</span><span
+                            class="sol-metric-value">212</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Arab states — full coverage</span><span
+                            class="sol-metric-value">22 / 22</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Years of archive depth</span><span
+                            class="sol-metric-value">27+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Websites monitored daily</span><span
+                            class="sol-metric-value">80,000+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">TV &amp; radio channels</span><span
+                            class="sol-metric-value">3,360</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Languages covered</span><span
+                            class="sol-metric-value">123</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="red-rule"></div>
+
+    <section class="section" id="academic">
+        <div class="container">
+            <div class="solution-hero fade-up">
+                <div>
+                    <span
+                        style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,158,160,0.12);border:1px solid rgba(0,158,160,0.25);border-radius:16px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;">🎓
+                        Academic &amp; Research</span>
+                    <h2>"The Arabic Library the World Has Been Waiting For."</h2>
+                    <p>Arabia Inform is the researcher's most powerful tool for Arabic media and academic study — an
+                        archive assembled with the same scholarly rigor demanded by universities and research
+                        institutions.</p>
+                    <div class="solution-benefit">1.7M research papers, 500K+ dissertations, 100K academic books — all
+                        searchable</div>
+                    <div class="solution-benefit">Citation-ready bibliographic records meeting international library
+                        standards</div>
+                    <div class="solution-benefit">Historical print and broadcast archives for media studies and
+                        journalism research</div>
+                    <div class="solution-benefit">Institutional subscription plans for universities and research centers
+                    </div>
+                    <div class="solution-benefit">Custom dataset exports for computational linguistics and digital
+                        humanities</div>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Request Academic Access
+                        →</a>
+                </div>
+                <div class="solution-metrics">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">
+                        Academic Archive Scale</div>
+                    <div class="sol-metric"><span class="sol-metric-label">Research papers</span><span
+                            class="sol-metric-value">1.7 Million</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Dissertations (MA &amp; PhD)</span><span
+                            class="sol-metric-value">500,000+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Academic journals</span><span
+                            class="sol-metric-value">4,500</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Academic books</span><span
+                            class="sol-metric-value">100,000</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Conference papers</span><span
+                            class="sol-metric-value">120,000+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Countries represented</span><span
+                            class="sol-metric-value">39</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="red-rule"></div>
+
+    <section class="section" id="corporate">
+        <div class="container">
+            <div class="solution-hero fade-up">
+                <div>
+                    <span
+                        style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,158,160,0.12);border:1px solid rgba(0,158,160,0.25);border-radius:16px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;">🏢
+                        Corporate &amp; PR</span>
+                    <h2>"Your Brand's Arabic Reputation — Tracked Across Every Market, Every Day."</h2>
+                    <p>For companies operating in or entering Arab markets, Arabia Inform delivers unmatched media
+                        intelligence across all 22 Arab countries and beyond.</p>
+                    <div class="solution-benefit">Brand monitoring across 80,000+ Arabic news sites, TV channels, and
+                        print media</div>
+                    <div class="solution-benefit">Competitor intelligence and market narrative tracking across 22 Arab
+                        countries</div>
+                    <div class="solution-benefit">PR effectiveness measurement across all Arabic media channels</div>
+                    <div class="solution-benefit">Crisis monitoring and rapid response intelligence</div>
+                    <div class="solution-benefit">Custom market entry and reputation audit reports</div>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Schedule a Corporate Demo
+                        →</a>
+                </div>
+                <div class="solution-metrics">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">
+                        Corporate Intelligence</div>
+                    <div class="sol-metric"><span class="sol-metric-label">Arab countries covered</span><span
+                            class="sol-metric-value">22 / 22</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Websites monitored</span><span
+                            class="sol-metric-value">80,000+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">TV &amp; radio channels</span><span
+                            class="sol-metric-value">3,360</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Opinion pieces indexed</span><span
+                            class="sol-metric-value">500M+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Historical depth</span><span
+                            class="sol-metric-value">27+ years</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Alert delivery</span><span
+                            class="sol-metric-value">Real-time</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="red-rule"></div>
+
+    <section class="section" id="media">
+        <div class="container">
+            <div class="solution-hero fade-up">
+                <div>
+                    <span
+                        style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,158,160,0.12);border:1px solid rgba(0,158,160,0.25);border-radius:16px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;">📺
+                        Media &amp; Broadcasting</span>
+                    <h2>"Know Everything That Was Said, Published, or Broadcast — Since 1998."</h2>
+                    <p>Arabic media organizations use Arabia Inform to dominate the information landscape — real-time
+                        competitive intelligence combined with 27 years of historical depth.</p>
+                    <div class="solution-benefit">Monitor the full competitive media landscape in real time across
+                        80,000+ sources</div>
+                    <div class="solution-benefit">Research historical coverage of any topic or event back to January
+                        1998</div>
+                    <div class="solution-benefit">License archival content for documentary and editorial production
+                    </div>
+                    <div class="solution-benefit">Track journalist bylines, source credibility, and media house output
+                    </div>
+                    <div class="solution-benefit">Generate automated media round-up products for editorial teams</div>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Explore Media Solutions
+                        →</a>
+                </div>
+                <div class="solution-metrics">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">
+                        Broadcast Archive</div>
+                    <div class="sol-metric"><span class="sol-metric-label">Broadcast hours recorded</span><span
+                            class="sol-metric-value">120M+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">TV &amp; radio channels</span><span
+                            class="sol-metric-value">3,360</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">YouTube channels archived</span><span
+                            class="sol-metric-value">14,000</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Talk show episodes</span><span
+                            class="sol-metric-value">25 Million</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">TV news bulletins</span><span
+                            class="sol-metric-value">50 Million</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Archive start year</span><span
+                            class="sol-metric-value">2006</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div class="red-rule"></div>
+
+    <section class="section" id="ai">
+        <div class="container">
+            <div class="solution-hero fade-up">
+                <div>
+                    <span
+                        style="display:inline-flex;align-items:center;gap:6px;background:rgba(0,158,160,0.12);border:1px solid rgba(0,158,160,0.25);border-radius:16px;padding:5px 14px;font-size:10px;font-weight:700;letter-spacing:0.12em;color:var(--teal);text-transform:uppercase;margin-bottom:20px;">🤖
+                        AI &amp; Technology</span>
+                    <h2>"Build the Next Generation of Arabic AI on the World's Largest Arabic Corpus."</h2>
+                    <p>Arabia Inform's archive is the single most valuable Arabic language resource for AI development
+                        today — richly structured, deeply annotated, and spanning 27 years of linguistic evolution.</p>
+                    <div class="solution-benefit">3.28B+ structured Arabic articles for LLM pre-training and fine-tuning
+                    </div>
+                    <div class="solution-benefit">Richly annotated data: named entities, topics, subjects, full
+                        bibliographic metadata</div>
+                    <div class="solution-benefit">120M+ hours of broadcast transcripts for Arabic ASR model training
+                    </div>
+                    <div class="solution-benefit">Historical temporal data tracking 27 years of Arabic language
+                        evolution</div>
+                    <div class="solution-benefit">Custom annotation and dataset curation services</div>
+                    <div class="solution-benefit">API-based real-time data feeds for AI product integration</div>
+                    <a href="contact.html" class="btn btn-primary" style="margin-top:20px;">Discuss Data Partnership
+                        →</a>
+                </div>
+                <div class="solution-metrics">
+                    <div
+                        style="font-size:11px;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:16px;">
+                        AI Dataset Scale</div>
+                    <div class="sol-metric"><span class="sol-metric-label">Total structured items</span><span
+                            class="sol-metric-value">3.28B+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Online articles (LLM)</span><span
+                            class="sol-metric-value">3B+</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Broadcast transcripts</span><span
+                            class="sol-metric-value">120M+ hrs</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Print corpus</span><span
+                            class="sol-metric-value">280M clips</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Academic NLP corpus</span><span
+                            class="sol-metric-value">1.7M papers</span></div>
+                    <div class="sol-metric"><span class="sol-metric-label">Languages in corpus</span><span
+                            class="sol-metric-value">123</span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="cta-band">
+        <div class="container">
+            <h2 class="display-md">Find Your Solution</h2>
+            <p>Talk to our team — we'll tailor an access plan, dataset, or platform configuration exactly to your needs.
+            </p>
+            <div class="cta-buttons"><a href="contact.html" class="btn btn-primary btn-lg">Contact Our Team →</a><a
+                    href="contact.html" class="btn btn-secondary btn-lg">Request a Demo</a></div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <div class="logo-row"><span
+                            style="font-size:17px;font-weight:900;color:white;letter-spacing:0.15em;font-family:'Palatino Linotype',Palatino,serif;">ARABIA</span><span
+                            style="width:28px;height:28px;border-radius:50%;background:rgba(0,158,160,0.15);border:1px solid rgba(0,158,160,0.4);display:flex;align-items:center;justify-content:center;font-size:14px;color:var(--teal);font-family:'Noto Naskh Arabic',serif;margin:0 6px;">ع</span><span
+                            style="font-size:17px;font-weight:900;color:white;letter-spacing:0.15em;font-family:'Palatino Linotype',Palatino,serif;">INFORM</span>
+                    </div>
+                    <p>The custodian of Arabic civilization's documented intellectual output since 1998.</p>
+                    <div class="footer-tagline">Putting Middle East Information At Your Fingertips</div>
+                </div>
+                <div class="footer-col">
+                    <h4>The Archive</h4>
+                    <div class="footer-links"><a href="archive.html">Archive Overview</a><a
+                            href="archive-print.html">Print Media</a><a href="archive-online.html">Online Media</a><a
+                            href="archive-broadcast.html">Broadcast</a><a href="archive-academic.html">Academic</a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Products</h4>
+                    <div class="footer-links"><a href="products.html">Intelligence Platform</a><a
+                            href="products.html">Historical Access</a><a href="products.html">AI Data</a><a
+                            href="products.html">API</a></div>
+                </div>
+                <div class="footer-col">
+                    <h4>Company</h4>
+                    <div class="footer-links"><a href="about.html">About Us</a><a href="impact.html">Impact &amp;
+                            Numbers</a><a href="insights.html">Insights</a><a href="contact.html">Contact</a></div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Arabia Inform — Almotahida Education Group. All rights reserved.</p>
+                <div class="footer-legal"><a href="#">Privacy Policy</a><a href="#">Terms of Use</a><a href="#">Cookie
+                        Policy</a></div>
+            </div>
+        </div>
+    </footer>
+    <script src="../js/main.js"></script>
+</body>
+
+</html>
