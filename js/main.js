@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initTabs();
   initFormValidation();
-  initDataLines();
+  initTimelineTrace();
 });
 
 /* --- Sticky Navbar --- */
@@ -101,10 +101,14 @@ function initHeroMetrics() {
       setTimeout(() => {
         metric.classList.add('visible');
         const counter = metric.querySelector('[data-counter]');
-        if (counter) animateCounter(counter);
-      }, i * 300); // 300ms stagger matching flow architecture
+        // Trigger count-up only once
+        if (counter && !counter.dataset.counted) {
+          animateCounter(counter);
+          counter.dataset.counted = "true";
+        }
+      }, i * 300);
     });
-  }, 500); // Trigger smoothly after line renders
+  }, 500);
 }
 
 /* --- Scroll Reveal --- */
@@ -190,30 +194,32 @@ function initFormValidation() {
   });
 }
 
-/* --- Hero Data Lines --- */
-function initDataLines() {
-  const container = document.querySelector('.hero-data-lines');
+/* --- Timeline Trace Visual System --- */
+function initTimelineTrace() {
+  const container = document.querySelector('.hero-timeline-container');
   if (!container) return;
 
-  // 1. Create Architectural Data Lines (Very slow flow)
-  for (let i = 0; i < 10; i++) {
-    const line = document.createElement('div');
-    line.className = 'data-line';
-    line.style.top = `${Math.random() * 100}%`;
-    line.style.width = `${100 + Math.random() * 300}px`;
-    line.style.left = `-${Math.random() * 50}%`;
-    line.style.animationDelay = `${Math.random() * 20}s`;
-    line.style.setProperty('--flow-duration', `${20 + Math.random() * 10}s`);
-    container.appendChild(line);
-  }
+  // 1. Create a single architectural timeline line
+  const line = document.createElement('div');
+  line.className = 'timeline-line';
+  container.appendChild(line);
 
-  // 2. Create Structured Knowledge Nodes (Slow pulses)
-  for (let i = 0; i < 20; i++) {
+  // 2. Create historical nodes anchored along the line
+  const nodeCount = window.innerWidth < 992 ? 4 : 8;
+  for (let i = 0; i < nodeCount; i++) {
     const node = document.createElement('div');
-    node.className = 'data-node';
-    node.style.top = `${Math.random() * 100}%`;
-    node.style.left = `${Math.random() * 100}%`;
-    node.style.animationDelay = `${Math.random() * 10}s`;
+    node.className = 'trace-node';
+
+    // Position nodes horizontally along the line
+    const xPos = 15 + (i * (70 / (nodeCount - 1)));
+    node.style.left = `${xPos}%`;
+
+    // Slight vertical variance to feel organic/architectural
+    node.style.top = `${45 + (Math.sin(i) * 2)}%`;
+
+    // Staggered fade in
+    node.style.animationDelay = `${1 + (i * 0.4)}s`;
+
     container.appendChild(node);
   }
 }
