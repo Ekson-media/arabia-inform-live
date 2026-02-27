@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initTabs();
   initFormValidation();
   initKnowledgeFlow();
+  initBlogFilters();
 });
 
 /* --- Sticky Navbar --- */
@@ -241,4 +242,32 @@ function switchLanguage(targetLang) {
       window.location.href = '../' + filename;
     }
   }
+}
+
+/* --- Blog Filters --- */
+function initBlogFilters() {
+  const filterBtns = document.querySelectorAll('.blog-filters .filter-btn');
+  const blogCards = document.querySelectorAll('.blog-card');
+  if (!filterBtns.length || !blogCards.length) return;
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+
+      const filterValue = btn.textContent.trim().toLowerCase();
+
+      blogCards.forEach(card => {
+        const categoryElement = card.querySelector('.blog-card-category');
+        if (!categoryElement) return;
+        const category = categoryElement.textContent.trim().toLowerCase();
+
+        if (filterValue === 'all' || filterValue === 'الكل' || category === filterValue) {
+          card.style.display = 'block';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    });
+  });
 }
