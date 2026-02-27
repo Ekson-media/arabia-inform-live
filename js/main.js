@@ -195,14 +195,26 @@ function initDataLines() {
   const container = document.querySelector('.hero-data-lines');
   if (!container) return;
 
-  for (let i = 0; i < 12; i++) {
+  // 1. Create Architectural Data Lines (Very slow flow)
+  for (let i = 0; i < 10; i++) {
     const line = document.createElement('div');
     line.className = 'data-line';
     line.style.top = `${Math.random() * 100}%`;
-    line.style.width = `${60 + Math.random() * 140}px`;
-    line.style.animationDelay = `${Math.random() * 4}s`;
-    line.style.animationDuration = `${3 + Math.random() * 3}s`;
+    line.style.width = `${100 + Math.random() * 300}px`;
+    line.style.left = `-${Math.random() * 50}%`;
+    line.style.animationDelay = `${Math.random() * 20}s`;
+    line.style.setProperty('--flow-duration', `${20 + Math.random() * 10}s`);
     container.appendChild(line);
+  }
+
+  // 2. Create Structured Knowledge Nodes (Slow pulses)
+  for (let i = 0; i < 20; i++) {
+    const node = document.createElement('div');
+    node.className = 'data-node';
+    node.style.top = `${Math.random() * 100}%`;
+    node.style.left = `${Math.random() * 100}%`;
+    node.style.animationDelay = `${Math.random() * 10}s`;
+    container.appendChild(node);
   }
 }
 
