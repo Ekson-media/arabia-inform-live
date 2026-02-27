@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollReveal();
   initTabs();
   initFormValidation();
-  initTimelineTrace();
+  initKnowledgeFlow();
 });
 
 /* --- Sticky Navbar --- */
@@ -194,32 +194,35 @@ function initFormValidation() {
   });
 }
 
-/* --- Timeline Trace Visual System --- */
-function initTimelineTrace() {
-  const container = document.querySelector('.hero-timeline-container');
+/* --- Knowledge Flow Layer System --- */
+function initKnowledgeFlow() {
+  const container = document.querySelector('.hero-flow-layer');
   if (!container) return;
 
-  // 1. Create a single architectural timeline line
-  const line = document.createElement('div');
-  line.className = 'timeline-line';
-  container.appendChild(line);
+  // 1. Faint Timeline Trace (Static)
+  const staticTrace = document.createElement('div');
+  staticTrace.className = 'timeline-trace-faint';
+  container.appendChild(staticTrace);
 
-  // 2. Create historical nodes anchored along the line
-  const nodeCount = window.innerWidth < 992 ? 4 : 8;
-  for (let i = 0; i < nodeCount; i++) {
+  // 2. Layer 1: Flow Lines (Very slow horizontal movement)
+  for (let i = 0; i < 8; i++) {
+    const line = document.createElement('div');
+    line.className = 'flow-line';
+    line.style.top = `${10 + Math.random() * 80}%`;
+    line.style.width = `${100 + Math.random() * 200}px`;
+    line.style.animationDelay = `${Math.random() * 20}s`;
+    line.style.setProperty('--flow-duration', `${25 + Math.random() * 10}s`);
+    container.appendChild(line);
+  }
+
+  // 3. Layer 2: Knowledge Nodes (Slow fades)
+  for (let i = 0; i < 15; i++) {
     const node = document.createElement('div');
-    node.className = 'trace-node';
-
-    // Position nodes horizontally along the line
-    const xPos = 15 + (i * (70 / (nodeCount - 1)));
-    node.style.left = `${xPos}%`;
-
-    // Slight vertical variance to feel organic/architectural
-    node.style.top = `${45 + (Math.sin(i) * 2)}%`;
-
-    // Staggered fade in
-    node.style.animationDelay = `${1 + (i * 0.4)}s`;
-
+    node.className = 'flow-node';
+    node.style.top = `${10 + Math.random() * 80}%`;
+    node.style.left = `${5 + Math.random() * 90}%`;
+    node.style.animationDelay = `${Math.random() * 10}s`;
+    node.style.setProperty('--node-duration', `${8 + Math.random() * 6}s`);
     container.appendChild(node);
   }
 }

@@ -639,63 +639,79 @@ p {
   pointer-events: none;
 }
 
-/* Timeline Trace System */
-.hero-timeline-container {
+/* --- Knowledge Flow Layer System --- */
+.hero-flow-layer {
   position: absolute;
   inset: 0;
-  width: 50%;
-  left: 50%;
   overflow: hidden;
   z-index: 1;
   pointer-events: none;
 }
 
-.timeline-line {
+/* Faint Static Trace behind Right Panel */
+.timeline-trace-faint {
   position: absolute;
   top: 45%;
-  left: 0;
-  width: 100%;
+  left: 50%;
+  width: 50%;
   height: 1px;
   background: linear-gradient(90deg,
       rgba(22, 140, 139, 0) 0%,
-      rgba(22, 140, 139, 0.15) 30%,
-      rgba(22, 140, 139, 0.15) 70%,
+      rgba(22, 140, 139, 0.08) 30%,
+      rgba(22, 140, 139, 0.08) 70%,
       rgba(22, 140, 139, 0) 100%);
-  transform-origin: left center;
-  animation: timelineFloat 28s ease-in-out infinite;
+  opacity: 0.5;
 }
 
-.trace-node {
+/* Layer 1: Flow Lines */
+.flow-line {
   position: absolute;
-  width: 3px;
-  height: 3px;
-  background: rgba(22, 140, 139, 0.25);
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(22, 140, 139, 0.15), transparent);
+  animation: flowLayerMove var(--flow-duration, 30s) ease-in-out infinite;
+  opacity: 0;
+}
+
+/* Layer 2: Knowledge Nodes */
+.flow-node {
+  position: absolute;
+  width: 2px;
+  height: 2px;
+  background: rgba(22, 140, 139, 0.2);
   border-radius: 50%;
   opacity: 0;
-  animation: nodeFadeIn 1.5s ease-out forwards;
+  animation: nodeFade var(--node-duration, 10s) ease-in-out infinite;
 }
 
-@keyframes timelineFloat {
+@keyframes flowLayerMove {
+  0% {
+    transform: translateX(-150%);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  75% {
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateX(200%);
+    opacity: 0;
+  }
+}
+
+@keyframes nodeFade {
 
   0%,
   100% {
-    transform: translateY(0) scaleX(1);
+    opacity: 0;
   }
 
   50% {
-    transform: translateY(-15px) scaleX(1.02);
-  }
-}
-
-@keyframes nodeFadeIn {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-
-  to {
     opacity: 1;
-    transform: scale(1);
   }
 }
 
@@ -715,15 +731,16 @@ p {
 
 /* Mobile: Static Background */
 @media (max-width: 991px) {
-  .timeline-line {
+
+  .flow-line,
+  .flow-node {
     animation: none;
-    top: 50%;
     opacity: 0.1;
   }
 
-  .hero-timeline-container {
-    width: 100%;
+  .timeline-trace-faint {
     left: 0;
+    width: 100%;
   }
 }
 
