@@ -780,7 +780,8 @@ async function saveChanges() {
         await githubCreateOrUpdateFile(
             state.currentPage,
             encodedContent,
-            `Update content: ${state.currentPage}`
+            `Update content: ${state.currentPage}`,
+            state.currentPageSha
         );
 
         hideLoading();
