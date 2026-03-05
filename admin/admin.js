@@ -231,7 +231,7 @@ async function openEditor(filePath) {
     showLoading('Loading page...');
 
     try {
-        // Fetch page content from GitHub
+        // 1. Fetch raw HTML from GitHub API (for saving later)
         const res = await fetch(
             `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${filePath}?ref=${CONFIG.branch}`,
             { headers: { 'Authorization': `token ${state.token}` } }
@@ -242,58 +242,33 @@ async function openEditor(filePath) {
         const data = await res.json();
         state.currentPageSha = data.sha;
 
-        // Decode base64 content
         const content = decodeBase64(data.content);
         state.originalHTML = content;
         state.currentPageContent = content;
 
-        // Load into iframe
+        // 2. Load the LIVE page URL in the iframe (renders perfectly)
         const iframe = document.getElementById('editorFrame');
+        const origin = window.location.origin;
+        const sitePath = window.location.pathname.replace(/\/admin\/.*$/, '/');
+        const liveUrl = `${origin}${sitePath}${filePath}`;
 
-        // Write the content into the iframe
+        // Remove sandbox so the page loads and renders fully
+        iframe.removeAttribute('sandbox');
+
         iframe.onload = () => {
             setTimeout(() => {
                 injectEditingCapabilities(iframe);
                 hideLoading();
-            }, 300);
+            }, 800);
         };
 
-        // Use srcdoc to load the HTML
-        // We need to adjust relative paths for resources (css, js, images)
-        const adjustedContent = adjustRelativePaths(content, filePath);
-        iframe.srcdoc = adjustedContent;
+        iframe.src = liveUrl;
 
     } catch (err) {
         hideLoading();
         showToast('Failed to load page: ' + err.message, 'error');
         closeEditor();
     }
-}
-
-function adjustRelativePaths(html, filePath) {
-    // Use a <base> tag to let the browser resolve all relative paths automatically
-    const isAr = filePath.startsWith('ar/');
-
-    // Compute the base URL for this page's directory
-    // The origin is where the site is served from (e.g., http://localhost:3000 or https://user.github.io/repo)
-    const origin = window.location.origin;
-    const sitePath = window.location.pathname.replace(/\/admin\/.*$/, '/');
-    let baseUrl;
-    if (isAr) {
-        baseUrl = `${origin}${sitePath}ar/`;
-    } else {
-        baseUrl = `${origin}${sitePath}`;
-    }
-
-    let adjusted = html;
-
-    // Inject <base> tag right after <head> to resolve all relative paths
-    adjusted = adjusted.replace(/<head([^>]*)>/i, `<head$1><base href="${baseUrl}">`);
-
-    // Remove any <script> tags to prevent JS from running in the editor
-    adjusted = adjusted.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
-
-    return adjusted;
 }
 
 function decodeBase64(encoded) {
@@ -326,7 +301,7 @@ function closeEditor() {
     state.changes = 0;
 
     const iframe = document.getElementById('editorFrame');
-    iframe.srcdoc = '';
+    iframe.src = 'about:blank';
 }
 
 // ═══════════════════════════════════════════
@@ -794,11 +769,13 @@ function escapeRegExp(string) {
 }
 
 async function undoChanges() {
-    if (!state.originalHTML) return;
+    if (!state.currentPage) return;
 
-    // Reload the page in the iframe
+    // Reload the live page in the iframe
     const iframe = document.getElementById('editorFrame');
-    const adjustedContent = adjustRelativePaths(state.originalHTML, state.currentPage);
+    const origin = window.location.origin;
+    const sitePath = window.location.pathname.replace(/\/admin\/.*$/, '/');
+    const liveUrl = `${origin}${sitePath}${state.currentPage}`;
 
     iframe.onload = () => {
         setTimeout(() => {
@@ -806,10 +783,10 @@ async function undoChanges() {
             state.changes = 0;
             updateChangeUI();
             showToast('All changes undone.', 'info');
-        }, 300);
+        }, 800);
     };
 
-    iframe.srcdoc = adjustedContent;
+    iframe.src = liveUrl;
 }
 
 // ═══════════════════════════════════════════
