@@ -777,12 +777,16 @@ async function saveChanges() {
         document.getElementById('loadingText').textContent = 'Preparing to publish...';
 
         const encodedContent = encodeBase64(updatedHTML);
-        await githubCreateOrUpdateFile(
+        const publishResult = await githubCreateOrUpdateFile(
             state.currentPage,
             encodedContent,
             `Update content: ${state.currentPage}`,
             state.currentPageSha
         );
+
+        if (publishResult && publishResult.content && publishResult.content.sha) {
+            state.currentPageSha = publishResult.content.sha;
+        }
 
         hideLoading();
         showToast('✅ Changes published successfully! The website will update shortly.', 'success');
@@ -859,26 +863,8 @@ async function githubCreateOrUpdateFile(path, base64Content, message, sha = null
         branch: CONFIG.branch
     };
 
-    // ALWAYS fetch the latest SHA right before saving to prevent mismatch errors
-    try {
-        const timestamp = new Date().getTime();
-        const existing = await fetch(`${url}?ref=${CONFIG.branch}&t=${timestamp}`, {
-            headers: {
-                'Authorization': `token ${state.token}`,
-                'Cache-Control': 'no-cache, no-store, must-revalidate',
-                'Pragma': 'no-cache',
-                'Expires': '0'
-            }
-        });
-        if (existing.ok) {
-            const data = await existing.json();
-            body.sha = data.sha;
-        } else if (sha) {
-            // Fallback to the provided SHA if the fetch failed (e.g. 404, or weird cache issues)
-            body.sha = sha;
-        }
-    } catch {
-        if (sha) body.sha = sha;
+    if (sha) {
+        body.sha = sha;
     }
 
     const res = await fetch(url, {
