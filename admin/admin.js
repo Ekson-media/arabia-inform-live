@@ -661,32 +661,14 @@ async function saveChanges() {
             updatedHTML = updatedHTML.replace(new RegExp(escapeRegExp(oldSrc), 'g'), relativePath);
         }
 
-        // 3. Re-fetch the latest SHA before committing (avoids stale SHA errors)
+        // 3. Commit the updated HTML to GitHub
         document.getElementById('loadingText').textContent = 'Preparing to publish...';
-        const timestamp = new Date().getTime();
-        const latestRes = await fetch(
-            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}&t=${timestamp}`,
-            {
-                headers: {
-                    'Authorization': `token ${state.token}`,
-                    'Cache-Control': 'no-cache, no-store, must-revalidate',
-                    'Pragma': 'no-cache',
-                    'Expires': '0'
-                }
-            }
-        );
-        if (latestRes.ok) {
-            const latestData = await latestRes.json();
-            state.currentPageSha = latestData.sha;
-        }
 
-        // 4. Commit the updated HTML to GitHub
         const encodedContent = encodeBase64(updatedHTML);
         await githubCreateOrUpdateFile(
             state.currentPage,
             encodedContent,
-            `Update content: ${state.currentPage}`,
-            state.currentPageSha
+            `Update content: ${state.currentPage}`
         );
 
         hideLoading();
@@ -696,22 +678,6 @@ async function saveChanges() {
         state.originalHTML = updatedHTML;
         state.changes = 0;
         updateChangeUI();
-
-        // Refresh the SHA for next save (with cache buster)
-        const ts2 = new Date().getTime();
-        const res = await fetch(
-            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}&t=${ts2}`,
-            {
-                headers: {
-                    'Authorization': `token ${state.token}`,
-                    'Cache-Control': 'no-cache'
-                }
-            }
-        );
-        if (res.ok) {
-            const data = await res.json();
-            state.currentPageSha = data.sha;
-        }
 
         // Clear edit markers in iframe
         const editedEls = doc.querySelectorAll('.edited');
@@ -780,20 +746,22 @@ async function githubCreateOrUpdateFile(path, base64Content, message, sha = null
         branch: CONFIG.branch
     };
 
-    if (sha) {
-        body.sha = sha;
-    } else {
-        // Check if file already exists
-        try {
-            const existing = await fetch(url, {
-                headers: { 'Authorization': `token ${state.token}` }
-            });
-            if (existing.ok) {
-                const data = await existing.json();
-                body.sha = data.sha;
+    // ALWAYS fetch the latest SHA right before saving to prevent mismatch errors
+    try {
+        const timestamp = new Date().getTime();
+        const existing = await fetch(`${url}?ref=${CONFIG.branch}&t=${timestamp}`, {
+            headers: {
+                'Authorization': `token ${state.token}`,
+                'Cache-Control': 'no-cache, no-store, must-revalidate',
+                'Pragma': 'no-cache',
+                'Expires': '0'
             }
-        } catch { /* File doesn't exist, that's fine */ }
-    }
+        });
+        if (existing.ok) {
+            const data = await existing.json();
+            body.sha = data.sha;
+        }
+    } catch { /* File doesn't exist yet, that's fine */ }
 
     const res = await fetch(url, {
         method: 'PUT',
