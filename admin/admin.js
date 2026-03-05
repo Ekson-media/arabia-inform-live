@@ -470,6 +470,101 @@ function injectEditingCapabilities(iframe) {
         }
     });
 
+    // --- Rich Text Toolbar ---
+    const toolbarHTML = `
+      <div id="ai-rti-toolbar" style="display: none; position: absolute; z-index: 999999; background: #1B2A4A; padding: 6px; border-radius: 8px; box-shadow: 0 8px 24px rgba(0,0,0,0.3); display: flex; gap: 4px; align-items: center; border: 1px solid rgba(255,255,255,0.1);">
+         <button data-cmd="bold" title="Bold" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; font-weight:bold; font-family:serif; font-size:16px;">B</button>
+         <button data-cmd="italic" title="Italic" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; font-style:italic; font-family:serif; font-size:16px;">I</button>
+         <button data-cmd="underline" title="Underline" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; text-decoration:underline; font-family:serif; font-size:16px;">U</button>
+         <div style="width:1px; height:20px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+         <button data-cmd="justifyLeft" title="Align Left" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; font-size:14px;">≣L</button>
+         <button data-cmd="justifyCenter" title="Align Center" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; font-size:14px;">≣C</button>
+         <button data-cmd="justifyRight" title="Align Right" style="background:transparent; border:none; color:white; width:32px; height:32px; cursor:pointer; border-radius:6px; font-size:14px;">≣R</button>
+         <div style="width:1px; height:20px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+         <button data-cmd="insertUnorderedList" title="Bullet List" style="background:transparent; border:none; color:white; width:36px; height:32px; cursor:pointer; border-radius:6px; font-size:18px;">•=</button>
+         <div style="width:1px; height:20px; background:rgba(255,255,255,0.2); margin:0 4px;"></div>
+         <input type="color" id="ai-color-picker" title="Text Color" style="width:28px; height:28px; padding:0; border:none; cursor:pointer; background:transparent; border-radius:4px;">
+      </div>
+    `;
+    const tbWrapper = doc.createElement('div');
+    tbWrapper.innerHTML = toolbarHTML;
+    const toolbar = tbWrapper.firstElementChild;
+    toolbar.style.display = 'none';
+    doc.body.appendChild(toolbar);
+
+    // Toolbar interactions
+    let isEditingColor = false;
+
+    toolbar.addEventListener('mousedown', (e) => {
+        // Prevent default to keep text selection active
+        if (e.target.tagName !== 'INPUT') {
+            e.preventDefault();
+        }
+
+        const btn = e.target.closest('button');
+        if (btn) {
+            const cmd = btn.getAttribute('data-cmd');
+            doc.execCommand(cmd, false, null);
+
+            // Mark as edited
+            if (doc.activeElement && doc.activeElement.hasAttribute('data-ai-editable')) {
+                doc.activeElement.classList.add('edited');
+                recountChanges(doc);
+            }
+        }
+    });
+
+    const colorPicker = toolbar.querySelector('#ai-color-picker');
+    colorPicker.addEventListener('input', (e) => {
+        doc.execCommand('foreColor', false, e.target.value);
+        if (doc.activeElement && doc.activeElement.hasAttribute('data-ai-editable')) {
+            doc.activeElement.classList.add('edited');
+            recountChanges(doc);
+        }
+    });
+
+    colorPicker.addEventListener('click', () => { isEditingColor = true; });
+    colorPicker.addEventListener('blur', () => { isEditingColor = false; });
+
+    // Show/hide toolbar on selection
+    doc.addEventListener('selectionchange', () => {
+        if (isEditingColor) return; // Don't hide while picking color
+
+        const sel = doc.getSelection();
+        if (sel.rangeCount > 0 && !sel.isCollapsed) {
+            let node = sel.anchorNode;
+            if (node.nodeType === 3) node = node.parentNode;
+
+            const editable = node.closest('[data-ai-editable]');
+            if (editable) {
+                const range = sel.getRangeAt(0);
+                const rect = range.getBoundingClientRect();
+
+                toolbar.style.display = 'flex';
+                // Position above selection
+                toolbar.style.top = Math.max(10, rect.top + iframe.contentWindow.scrollY - 50) + 'px';
+                toolbar.style.left = Math.max(10, rect.left + iframe.contentWindow.scrollX + (rect.width / 2) - (toolbar.offsetWidth / 2)) + 'px';
+
+                // Update color picker value to current text color if possible
+                try {
+                    const color = iframe.contentWindow.getComputedStyle(node).color;
+                    // convert rgb to hex for input
+                    const rgb = color.match(/\d+/g);
+                    if (rgb && rgb.length >= 3) {
+                        const hex = "#" + ((1 << 24) + (parseInt(rgb[0]) << 16) + (parseInt(rgb[1]) << 8) + parseInt(rgb[2])).toString(16).slice(1);
+                        colorPicker.value = hex;
+                    }
+                } catch (e) { }
+
+                return;
+            }
+        }
+
+        // Hide if no selection or collapsed
+        toolbar.style.display = 'none';
+        toolbar.style.top = '-9999px';
+    });
+
     // Prevent all link navigation
     doc.addEventListener('click', (e) => {
         const link = e.target.closest('a');
