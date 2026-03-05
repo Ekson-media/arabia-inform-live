@@ -170,11 +170,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Auto-login if session exists
     const storedToken = localStorage.getItem('ai_admin_token') || _decodeTk();
     const storedHash = localStorage.getItem('ai_admin_pw_hash') || CONFIG.passwordHash;
-    if (storedToken && storedHash && storedHash !== '@@PLACEHOLDER@@') {
+    if (storedToken && storedHash) {
         state.token = storedToken;
         validateToken().then(valid => {
             if (valid) {
-                // Don't auto-login, still require password for security
+                showDashboard();
             }
         });
     }
@@ -451,6 +451,23 @@ function injectEditingCapabilities(iframe) {
             e.stopPropagation();
             openImageModal(img);
         });
+    });
+
+    // Add a feature to delete elements (text blocks or image wrappers)
+    doc.addEventListener('keydown', (e) => {
+        if (e.key === 'Delete' || (e.key === 'Backspace' && e.shiftKey)) {
+            const activeEl = doc.activeElement;
+            const isText = activeEl && activeEl.hasAttribute('data-ai-editable');
+            const isImage = activeEl && (activeEl.tagName === 'IMG' || activeEl.querySelector('img'));
+
+            // Delete text element if selected or empty
+            if (isText) {
+                activeEl.remove();
+                state.changes++;
+                updateChangeUI();
+                e.preventDefault();
+            }
+        }
     });
 
     // Prevent all link navigation
