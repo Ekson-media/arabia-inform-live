@@ -872,8 +872,13 @@ async function githubCreateOrUpdateFile(path, base64Content, message, sha = null
         if (existing.ok) {
             const data = await existing.json();
             body.sha = data.sha;
+        } else if (sha) {
+            // Fallback to the provided SHA if the fetch failed (e.g. 404, or weird cache issues)
+            body.sha = sha;
         }
-    } catch { /* File doesn't exist yet, that's fine */ }
+    } catch {
+        if (sha) body.sha = sha;
+    }
 
     const res = await fetch(url, {
         method: 'PUT',
