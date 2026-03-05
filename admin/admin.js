@@ -365,14 +365,6 @@ function injectEditingCapabilities(iframe) {
     /* Prevent links from navigating */
     a { pointer-events: auto !important; }
     body { cursor: default; }
-    /* ===== FORCE ALL CONTENT VISIBLE (JS is stripped in editor) ===== */
-    /* Nuclear override: make EVERYTHING visible */
-    * {
-      opacity: 1 !important;
-      visibility: visible !important;
-      animation: none !important;
-      transition: none !important;
-    }
     /* Don't override the image overlay which should start hidden */
     .ai-img-overlay {
       opacity: 0 !important;
@@ -383,34 +375,6 @@ function injectEditingCapabilities(iframe) {
     }
   `;
     doc.head.appendChild(style);
-
-    // Force-show ALL elements via inline styles (highest specificity)
-    const allElements = doc.querySelectorAll('*');
-    allElements.forEach(el => {
-        // Skip the image overlay we injected
-        if (el.classList && el.classList.contains('ai-img-overlay')) return;
-
-        const cs = el.style;
-        // Force visibility
-        if (cs.opacity === '0' || cs.opacity === '') {
-            cs.setProperty('opacity', '1', 'important');
-        }
-        cs.setProperty('visibility', 'visible', 'important');
-        cs.setProperty('animation', 'none', 'important');
-        cs.setProperty('transition', 'none', 'important');
-
-        // Remove any transform that might push elements off-screen
-        if (cs.transform && cs.transform !== 'none') {
-            cs.setProperty('transform', 'none', 'important');
-        }
-
-        // Add .visible class to all .reveal elements
-        if (el.classList && el.classList.contains('reveal')) {
-            el.classList.add('visible');
-            el.style.setProperty('opacity', '1', 'important');
-            el.style.setProperty('transform', 'none', 'important');
-        }
-    });
 
     // Mark text elements as editable
     const textSelectors = 'h1, h2, h3, h4, h5, h6, p, span.section-label, span.counter-label, span.stat-lbl, span.hero-title-line2, span.blog-category, div.hero-badge, li, blockquote, .quote-text, .quote-author, .footer-brand-line';
