@@ -391,46 +391,51 @@ function injectEditingCapabilities(iframe) {
     a { pointer-events: auto !important; }
     body { cursor: default; }
     /* ===== FORCE ALL CONTENT VISIBLE (JS is stripped in editor) ===== */
-    /* Override scroll-reveal hidden state */
-    .reveal, .reveal * {
+    /* Nuclear override: make EVERYTHING visible */
+    * {
       opacity: 1 !important;
-      transform: none !important;
       visibility: visible !important;
+      animation: none !important;
       transition: none !important;
     }
-    /* Force all elements visible regardless of animation state */
-    *, *::before, *::after {
-      animation: none !important;
-      animation-play-state: paused !important;
-      transition-delay: 0s !important;
+    /* Don't override the image overlay which should start hidden */
+    .ai-img-overlay {
+      opacity: 0 !important;
+      transition: opacity 0.2s !important;
     }
-    /* Hero section elements */
-    .hero-content, .hero-badge, .hero-stats-card,
-    .hero-title-line2, .hero-subtitle, .hero-body,
-    .hero-ctas, .stat-item, .stat-val-group {
+    [data-ai-img]:hover .ai-img-overlay {
       opacity: 1 !important;
-      transform: none !important;
-      visibility: visible !important;
-    }
-    /* Counter & stat elements */
-    .counter-item, .counter-number, .stat-val {
-      opacity: 1 !important;
-      transform: none !important;
-    }
-    /* Service cards, blog cards, tab panels */
-    .service-card, .blog-card, .tab-panel,
-    .panel-content, .quote-block, .section-header {
-      opacity: 1 !important;
-      transform: none !important;
-      visibility: visible !important;
-    }
-    /* Ensure all sections are visible */
-    section, section * {
-      opacity: 1 !important;
-      visibility: visible !important;
     }
   `;
     doc.head.appendChild(style);
+
+    // Force-show ALL elements via inline styles (highest specificity)
+    const allElements = doc.querySelectorAll('*');
+    allElements.forEach(el => {
+        // Skip the image overlay we injected
+        if (el.classList && el.classList.contains('ai-img-overlay')) return;
+
+        const cs = el.style;
+        // Force visibility
+        if (cs.opacity === '0' || cs.opacity === '') {
+            cs.setProperty('opacity', '1', 'important');
+        }
+        cs.setProperty('visibility', 'visible', 'important');
+        cs.setProperty('animation', 'none', 'important');
+        cs.setProperty('transition', 'none', 'important');
+
+        // Remove any transform that might push elements off-screen
+        if (cs.transform && cs.transform !== 'none') {
+            cs.setProperty('transform', 'none', 'important');
+        }
+
+        // Add .visible class to all .reveal elements
+        if (el.classList && el.classList.contains('reveal')) {
+            el.classList.add('visible');
+            el.style.setProperty('opacity', '1', 'important');
+            el.style.setProperty('transform', 'none', 'important');
+        }
+    });
 
     // Mark text elements as editable
     const textSelectors = 'h1, h2, h3, h4, h5, h6, p, span.section-label, span.counter-label, span.stat-lbl, span.hero-title-line2, span.blog-category, div.hero-badge, li, blockquote, .quote-text, .quote-author, .footer-brand-line';
