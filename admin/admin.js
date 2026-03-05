@@ -390,9 +390,44 @@ function injectEditingCapabilities(iframe) {
     /* Prevent links from navigating */
     a { pointer-events: auto !important; }
     body { cursor: default; }
-    /* Disable transitions/animations in edit mode */
+    /* ===== FORCE ALL CONTENT VISIBLE (JS is stripped in editor) ===== */
+    /* Override scroll-reveal hidden state */
+    .reveal, .reveal * {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+      transition: none !important;
+    }
+    /* Force all elements visible regardless of animation state */
     *, *::before, *::after {
+      animation: none !important;
       animation-play-state: paused !important;
+      transition-delay: 0s !important;
+    }
+    /* Hero section elements */
+    .hero-content, .hero-badge, .hero-stats-card,
+    .hero-title-line2, .hero-subtitle, .hero-body,
+    .hero-ctas, .stat-item, .stat-val-group {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+    /* Counter & stat elements */
+    .counter-item, .counter-number, .stat-val {
+      opacity: 1 !important;
+      transform: none !important;
+    }
+    /* Service cards, blog cards, tab panels */
+    .service-card, .blog-card, .tab-panel,
+    .panel-content, .quote-block, .section-header {
+      opacity: 1 !important;
+      transform: none !important;
+      visibility: visible !important;
+    }
+    /* Ensure all sections are visible */
+    section, section * {
+      opacity: 1 !important;
+      visibility: visible !important;
     }
   `;
     doc.head.appendChild(style);
