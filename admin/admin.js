@@ -682,7 +682,18 @@ async function saveChanges() {
             updatedHTML = updatedHTML.replace(new RegExp(escapeRegExp(oldSrc), 'g'), relativePath);
         }
 
-        // 3. Commit the updated HTML to GitHub
+        // 3. Re-fetch the latest SHA before committing (avoids stale SHA errors)
+        document.getElementById('loadingText').textContent = 'Preparing to publish...';
+        const latestRes = await fetch(
+            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}`,
+            { headers: { 'Authorization': `token ${state.token}` } }
+        );
+        if (latestRes.ok) {
+            const latestData = await latestRes.json();
+            state.currentPageSha = latestData.sha;
+        }
+
+        // 4. Commit the updated HTML to GitHub
         const encodedContent = encodeBase64(updatedHTML);
         await githubCreateOrUpdateFile(
             state.currentPage,
