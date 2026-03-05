@@ -663,9 +663,17 @@ async function saveChanges() {
 
         // 3. Re-fetch the latest SHA before committing (avoids stale SHA errors)
         document.getElementById('loadingText').textContent = 'Preparing to publish...';
+        const timestamp = new Date().getTime();
         const latestRes = await fetch(
-            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}`,
-            { headers: { 'Authorization': `token ${state.token}` } }
+            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}&t=${timestamp}`,
+            {
+                headers: {
+                    'Authorization': `token ${state.token}`,
+                    'Cache-Control': 'no-cache, no-store, must-revalidate',
+                    'Pragma': 'no-cache',
+                    'Expires': '0'
+                }
+            }
         );
         if (latestRes.ok) {
             const latestData = await latestRes.json();
@@ -689,10 +697,16 @@ async function saveChanges() {
         state.changes = 0;
         updateChangeUI();
 
-        // Refresh the SHA for next save
+        // Refresh the SHA for next save (with cache buster)
+        const ts2 = new Date().getTime();
         const res = await fetch(
-            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}`,
-            { headers: { 'Authorization': `token ${state.token}` } }
+            `https://api.github.com/repos/${CONFIG.owner}/${CONFIG.repo}/contents/${state.currentPage}?ref=${CONFIG.branch}&t=${ts2}`,
+            {
+                headers: {
+                    'Authorization': `token ${state.token}`,
+                    'Cache-Control': 'no-cache'
+                }
+            }
         );
         if (res.ok) {
             const data = await res.json();
