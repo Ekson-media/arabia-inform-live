@@ -1409,6 +1409,21 @@ p {
 /* --- Mission / Quote Section --- */
 .mission-section {
   position: relative;
+  background: linear-gradient(135deg, var(--navy-dark), #0d343b);
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.mission-section h2 {
+  color: var(--white);
+}
+
+.mission-section .lead {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.mission-section .section-header p,
+.mission-section .section-header div {
+  color: rgba(255, 255, 255, 0.85);
 }
 
 .quote-block {
@@ -2913,6 +2928,7 @@ p {
   padding: 1px;
   background: linear-gradient(135deg, rgba(33, 152, 180, 0.4), transparent 50%, rgba(33, 152, 180, 0.2));
   -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
   -webkit-mask-composite: xor;
   mask-composite: exclude;
   pointer-events: none;
