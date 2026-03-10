@@ -919,6 +919,7 @@ p {
 
 .hero-title-line2 {
   display: inline-block;
+  color: var(--white) !important;
   animation: heroTitleLineTwo 0.6s cubic-bezier(0.4, 0, 0.2, 1) 0.2s both;
   /* Second line slides up 8px (200ms delay) */
 }
