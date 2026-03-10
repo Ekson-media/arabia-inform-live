@@ -1188,33 +1188,69 @@ p {
 }
 
 .quote-block {
-  border-left: 4px solid var(--gold);
-  padding-left: 24px;
+  background: rgba(13, 28, 34, 0.75);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(33, 152, 180, 0.2);
+  border-left: 3px solid rgba(33, 152, 180, 0.6);
+  border-radius: 16px;
+  padding: 32px 36px;
   margin-top: 32px;
+  position: relative;
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.25),
+    0 0 16px rgba(33, 152, 180, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+  transition: box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.quote-block::before {
+  content: '\201C';
+  position: absolute;
+  top: 16px;
+  left: 20px;
+  font-size: 48px;
+  font-family: Georgia, serif;
+  color: rgba(33, 152, 180, 0.3);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.quote-block:hover {
+  box-shadow:
+    0 12px 40px rgba(0, 0, 0, 0.3),
+    0 0 24px rgba(33, 152, 180, 0.08);
+  border-color: rgba(33, 152, 180, 0.35);
 }
 
 .rtl .quote-block {
-  border-left: none;
-  border-right: 4px solid var(--gold);
-  padding-left: 0;
-  padding-right: 24px;
+  border-left: 1px solid rgba(33, 152, 180, 0.2);
+  border-right: 3px solid rgba(33, 152, 180, 0.6);
+  padding-left: 36px;
+  padding-right: 36px;
+}
+
+.rtl .quote-block::before {
+  left: auto;
+  right: 20px;
 }
 
 .quote-text {
-  font-size: 22px;
-  font-weight: 500;
+  font-size: 20px;
+  font-weight: 400;
   font-style: italic;
-  color: var(--navy);
-  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.7;
   margin-bottom: 16px;
+  letter-spacing: 0.2px;
 }
 
 .quote-author {
-  font-size: 15px;
-  font-weight: 700;
-  color: var(--medium-gray);
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(33, 152, 180, 0.8);
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .abstract-map {
@@ -1376,90 +1412,46 @@ p {
 }
 
 .quote-block {
-  background: rgba(15, 30, 45, 0.45);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
-  border-radius: 20px;
-  padding: 44px 48px;
+  background: linear-gradient(135deg, var(--navy-dark), var(--navy));
+  border-radius: var(--radius-lg);
+  padding: 50px;
   position: relative;
   overflow: hidden;
   margin-top: 48px;
-  border: 1px solid rgba(33, 152, 180, 0.15);
-  border-left: 3px solid;
-  border-image: linear-gradient(to bottom, rgba(33, 152, 180, 0.7), rgba(33, 152, 180, 0.15)) 1;
-  box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.15),
-    0 0 20px rgba(33, 152, 180, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
-  transition: box-shadow 0.4s ease, transform 0.4s ease;
-}
-
-.quote-block:hover {
-  box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.2),
-    0 0 28px rgba(33, 152, 180, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.06);
-  transform: translateY(-2px);
+  border-left: 4px solid var(--crimson);
 }
 
 .rtl .quote-block {
-  border-left: 1px solid rgba(33, 152, 180, 0.15);
-  border-right: 3px solid;
-  border-image: linear-gradient(to bottom, rgba(33, 152, 180, 0.7), rgba(33, 152, 180, 0.15)) 1;
+  border-left: none;
+  border-right: 4px solid var(--crimson);
 }
 
 .quote-block::before {
-  content: '\201C';
+  content: '"';
   position: absolute;
-  top: -10px;
-  left: 24px;
-  font-size: 160px;
-  color: rgba(33, 152, 180, 0.08);
-  font-family: Georgia, 'Times New Roman', serif;
+  top: -20px;
+  left: 30px;
+  font-size: 200px;
+  color: rgba(0, 158, 160, 0.1);
+  font-family: Georgia, serif;
   line-height: 1;
-  pointer-events: none;
-}
-
-.rtl .quote-block::before {
-  left: auto;
-  right: 24px;
-  content: '\201D';
-}
-
-.quote-block::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 200px;
-  height: 200px;
-  background: radial-gradient(circle, rgba(33, 152, 180, 0.06) 0%, transparent 70%);
-  pointer-events: none;
 }
 
 .quote-text {
-  font-size: 21px;
-  color: rgba(255, 255, 255, 0.92);
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.9);
   font-style: italic;
-  line-height: 1.85;
+  line-height: 1.8;
   position: relative;
   z-index: 1;
   margin: 0;
-  font-weight: 400;
-  letter-spacing: 0.2px;
 }
 
 .quote-author {
-  margin-top: 24px;
-  color: rgba(33, 152, 180, 0.9);
+  margin-top: 20px;
+  color: var(--gold);
   font-weight: 600;
-  font-size: 14px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  position: relative;
-  z-index: 1;
-  padding-top: 16px;
-  border-top: 1px solid rgba(33, 152, 180, 0.15);
+  font-size: 15px;
 }
 
 /* --- Audience Solutions Tabs --- */
