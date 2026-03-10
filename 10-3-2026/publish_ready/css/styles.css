@@ -1188,19 +1188,19 @@ p {
 }
 
 .quote-block {
-  background: rgba(13, 28, 34, 0.75);
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(33, 152, 180, 0.2);
-  border-left: 3px solid rgba(33, 152, 180, 0.6);
+  background: rgba(11, 23, 26, 0.92);
+  backdrop-filter: blur(28px) saturate(1.4);
+  -webkit-backdrop-filter: blur(28px) saturate(1.4);
+  border: 1px solid rgba(33, 152, 180, 0.15);
+  border-left: 3px solid rgba(33, 152, 180, 0.5);
   border-radius: 16px;
-  padding: 32px 36px;
+  padding: 36px 40px;
   margin-top: 32px;
   position: relative;
   box-shadow:
-    0 8px 32px rgba(0, 0, 0, 0.25),
-    0 0 16px rgba(33, 152, 180, 0.04),
-    inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    0 10px 40px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(33, 152, 180, 0.05),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
   transition: box-shadow 0.4s ease, border-color 0.4s ease;
 }
 
